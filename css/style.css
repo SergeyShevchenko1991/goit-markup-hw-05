@@ -89,6 +89,9 @@ p {
   height: 44px;
   fill: var(--icon-color);
   border-radius: 50%;
+  transition-duration: 250ms;
+  transition-property: background-color, fill;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-item a:hover,
@@ -136,11 +139,28 @@ p {
 }
 
 .menu a {
+  position: relative;
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: 0.02em;
   color: var(--black-color);
   text-decoration: none;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  transition-duration: 250ms;
+  transition-property: color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu .current::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -2px;
+  left: 0;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--brand-color);
 }
 
 .menu a:hover,
@@ -162,6 +182,9 @@ p {
   letter-spacing: 0.02em;
   color: var(--primary-color);
   text-decoration: none;
+  transition-duration: 250ms;
+  transition-property: color, fill;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-contacts li {
@@ -198,7 +221,7 @@ p {
 }
 
 .intro::before {
-  content: "«";
+  content: "";
   position: absolute;
   top: 0;
   right: 0;
@@ -287,6 +310,7 @@ p {
 
 .work-item {
   margin-right: 30px;
+  position: relative;
 }
 
 .work-item:last-child {
@@ -295,6 +319,24 @@ p {
 
 .work-item img {
   display: block;
+}
+
+.work-item-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 70px;
+  font-size: 14px;
+  line-height: 1.14;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white-color);
+  background-color: rgba(47, 48, 58, 0.8);
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 0;
+  padding: 8px;
 }
 
 .team {
@@ -365,6 +407,9 @@ p {
   border: 1px solid #afb1b8;
   border-radius: 4px;
   fill: var(--icon-color);
+  transition-duration: 250ms;
+  transition-property: border-color, fill;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .customers-item a:hover,
@@ -444,6 +489,9 @@ p {
 .project-item {
   margin-right: 30px;
   margin-bottom: 30px;
+  transition-duration: 250ms;
+  transition-property: box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-item:nth-child(3n) {
@@ -455,13 +503,39 @@ p {
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
 
+.project-item:hover .project-description {
+  transform: translateY(0);
+}
+
+.project-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-description {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--white-color);
+  background-color: rgba(33, 150, 243, 0.9);
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  transition-duration: 250ms;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(100%);
+}
+
 .project-list h3 {
   line-height: 2;
   letter-spacing: 0.06em;
-}
-
-.project-list p {
-  line-height: 1.87;
 }
 
 .category {
@@ -493,6 +567,9 @@ p {
   text-align: center;
   font-family: inherit;
   border-radius: 4px;
+  transition-duration: 250ms;
+  transition-property: background-color, color, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .category-button:hover,
@@ -527,5 +604,60 @@ p {
 
 .project-tip {
   font-size: 16px;
-  line-height: 30px;
+  line-height: 1.87;
+}
+
+.backdrop {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.is-hidden .modal {
+  opacity: 0;
+  transform: translateY(-10%);
+}
+
+.modal {
+  position: relative;
+  width: 528px;
+  min-height: 581px;
+  background-color: var(--white-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  opacity: 1;
+  transform: translateY(0);
+  transition-duration: 250ms;
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-clouse-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  background-color: var(--white-color);
+  cursor: pointer;
 }
